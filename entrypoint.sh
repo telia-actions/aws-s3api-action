@@ -2,7 +2,7 @@
 
 function usage_docs {
   echo ""
-  echo "- uses: keithweaver/aws-s3-github-action@v1.0.0"
+  echo "- uses: telia-actions/aws-s3-action@v1.0.0"
   echo "  with:"
   echo "    command: cp"
   echo "    source: ./local_file.txt"
@@ -113,11 +113,11 @@ function main {
 
   if [ "$COMMAND" == "cp" ] || [ "$COMMAND" == "mv" ] || [ "$COMMAND" == "sync" ]
   then
-    echo aws s3 $COMMAND "$INPUT_SOURCE" "$INPUT_DESTINATION" $INPUT_FLAGS
-    aws s3 "$COMMAND" "$INPUT_SOURCE" "$INPUT_DESTINATION" $INPUT_FLAGS
+    echo aws s3api $COMMAND "$INPUT_SOURCE" "$INPUT_DESTINATION" $INPUT_FLAGS
+    aws s3api "$COMMAND" "$INPUT_SOURCE" "$INPUT_DESTINATION" $INPUT_FLAGS
   else
-    echo aws s3 $COMMAND "$INPUT_SOURCE" $INPUT_FLAGS
-    aws s3 "$COMMAND" "$INPUT_SOURCE" $INPUT_FLAGS
+    echo aws s3api $COMMAND "$INPUT_SOURCE" $INPUT_FLAGS
+    aws s3api "$COMMAND" "$INPUT_SOURCE" $INPUT_FLAGS
   fi
 }
 

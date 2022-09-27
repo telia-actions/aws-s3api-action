@@ -1,9 +1,11 @@
 # AWS S3 Github Action
 
-Upload, download, or list files/folders through Github Actions.
+Interface to interact with S3 using the S3API.
+
+**Note**: This builds the dockerfile every time, and will use the `latest` tag on the [AWS CLI](https://hub.docker.com/r/amazon/aws-cli/tags) docker image.
 
 ```
-- uses: keithweaver/aws-s3-github-action@v1.0.0
+- uses: telia-actions/aws-s3-action@v1.0.0
   with:
     command: cp
     source: ./local_file.txt
@@ -38,20 +40,14 @@ Upload, download, or list files/folders through Github Actions.
 You are specifying the tag or branch by using the `@` after the Action name. Below, it uses `v1.0.0` which is based on the tag.
 
 ```
-- uses: keithweaver/aws-s3-github-action@v1.0.0
+- uses: telia-actions/aws-s3-action@v1.0.0
   ...
 ```
 
 This uses the master branch:
 
 ```
-- uses: keithweaver/aws-s3-github-action@master
-```
-
-This uses a feature branch called `dev-branch`:
-
-```
-- uses: keithweaver/aws-s3-github-action@dev-branch
+- uses: telia-actions/aws-s3-action@master
 ```
 
 It is recommended that you point to a specific version to avoid unexpected changes affecting your workflow.
@@ -103,7 +99,7 @@ Solution is [here](https://github.com/aws/aws-cli/issues/602#issuecomment-603877
 You need to a recursive flag for the `cp`. Looks like:
 
 ```
-- uses: keithweaver/aws-s3-github-action@v1.0.0
+- uses: telia-actions/aws-s3-action@v1.0.0
   name: Copy Folder
   with:
     command: cp
