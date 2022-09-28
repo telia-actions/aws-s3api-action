@@ -7,9 +7,7 @@ Interface to interact with S3 using the S3API.
 ```
 - uses: telia-actions/aws-s3-action@v1.0.0
   with:
-    command: cp
-    source: ./local_file.txt
-    destination: s3://yourbucket/folder/local_file.txt
+    command: cp ./local_file.txt s3://yourbucket/folder/local_file.txt
     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     aws_region: us-east-1
@@ -19,9 +17,7 @@ Interface to interact with S3 using the S3API.
 
 | Variable name      | Required/Optional  | Default  | Description                |
 | ------------------ | ------------------ | -------- | -------------------------- |
-| `command`          | Optional           | `cp`     | This is the command that is being performed. When using the AWS CLI, it's the portion following the service. `aws s3 cp ...` <- `cp`, `aws s3 ls` <- `ls` |
-| `source`           | Required           | N/A      | Depending on the command, this could be the directory you are requesting list, or the source file. |
-| `destination`      | Required for `cp`, `mv` and `sync` | N/A      | The location where you want the file to arrive. |
+| `command`          | Optional           | N/A     | This is the command that is being performed. |
 | `aws_access_key_id` | Optional   | N/A | This is the credentials from an IAM role for getting access to a bucket. [More info](https://docs.aws.amazon.com/cli/latest/reference/configure/) |
 | `aws_secret_access_key` | Optional   | N/A | This is the credentials from an IAM role for getting access to a bucket. [More info](https://docs.aws.amazon.com/cli/latest/reference/configure/) |
 | `aws_session_token` | Optional   | N/A | This is the credentials from an IAM role for getting access to a bucket. [More info](https://docs.aws.amazon.com/cli/latest/reference/configure/) |
@@ -31,53 +27,22 @@ Interface to interact with S3 using the S3API.
 
 ## FAQs
 
-**Where can I see this run in a pipeline as an example?**
-
-[Here](https://github.com/keithweaver/aws-s3-github-action-demo) is the test/verification pipeline that is used.
-
 **How can I use a specific version or test a feature branch?**
 
 You are specifying the tag or branch by using the `@` after the Action name. Below, it uses `v1.0.0` which is based on the tag.
 
 ```
-- uses: telia-actions/aws-s3-action@v1.0.0
+- uses: telia-actions/aws-s3api-action@v1.0.0
   ...
 ```
 
 This uses the master branch:
 
 ```
-- uses: telia-actions/aws-s3-action@master
+- uses: telia-actions/aws-s3api-action@master
 ```
 
 It is recommended that you point to a specific version to avoid unexpected changes affecting your workflow.
-
-
-**Can I run this local with Docker?**
-
-```
-# You should have Docker on your local and running.
-docker build . -t aws-s3-action
-docker run \
-  --env INPUT_AWS_ACCESS_KEY_ID="<ACCESS_KEY>" \
-  --env INPUT_AWS_SECRET_ACCESS_KEY="<ACCESS_SECRET>" \
-  --env INPUT_SOURCE="./sample.txt" \
-  --env INPUT_DESTINATION="s3://yourbucket/sample.txt" \
-  aws-s3-action
-# Docker image must follow the environment variables or they will not set.
-```
-
-**Can I run this local outside of Docker?**
-
-You can run a bash script
-
-```
-INPUT_AWS_ACCESS_KEY_ID="<ACCESS_KEY>" \
-  INPUT_AWS_SECRET_ACCESS_KEY="<ACCESS_SECRET>" \
-  INPUT_SOURCE="./sample.txt" \
-  INPUT_DESTINATION="s3://yourbucket/sample.txt" \
-  bash entrypoint.sh
-```
 
 
 ## Errors
@@ -102,9 +67,7 @@ You need to a recursive flag for the `cp`. Looks like:
 - uses: telia-actions/aws-s3-action@v1.0.0
   name: Copy Folder
   with:
-    command: cp
-    source: ./folder1/
-    destination: s3://bucket/folder1/
+    command: cp ./folder1/ s3://bucket/folder1/
     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     aws_region: us-east-1
