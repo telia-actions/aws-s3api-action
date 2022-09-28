@@ -54,7 +54,7 @@ function main {
   aws --version
 
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
-  aws s3api "$INPUT_COMMAND" $INPUT_FLAGS
+  aws s3api $INPUT_COMMAND $INPUT_FLAGS
 }
 
 main
