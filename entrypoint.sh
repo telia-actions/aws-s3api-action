@@ -45,6 +45,9 @@ function get_configuration_settings {
   else
     aws configure set region "$INPUT_AWS_REGION"
   fi
+
+  # Disable CLI Paging (piping to less)
+  aws configure set cli_pager ""
 }
 
 function main {
@@ -53,9 +56,12 @@ function main {
 
   aws --version
 
+  STDOUT=$(aws s3api $INPUT_COMMAND $INPUT_FLAGS)
+  RC=$?
+
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
-  echo "::set-output name=stdout::$(aws s3api $INPUT_COMMAND $INPUT_FLAGS)"
-  echo "::set-output name=rc::$(echo $?)"
+  echo "::set-output name=stdout::$STDOUT"
+  echo "::set-output name=rc::$RC"
 }
 
 main
