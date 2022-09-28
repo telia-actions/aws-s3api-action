@@ -29,3 +29,8 @@ inputs:
   flags:
     description: "Additional query flags."
     required: false
+outputs:
+  stdout:
+    description: "The stdout of the command"
+  rc:
+    description: "The return code of the command"

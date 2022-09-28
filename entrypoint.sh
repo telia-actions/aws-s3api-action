@@ -54,7 +54,8 @@ function main {
   aws --version
 
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
-  aws s3api $INPUT_COMMAND $INPUT_FLAGS
+  echo "::set-output name=stdout::$(aws s3api $INPUT_COMMAND $INPUT_FLAGS)"
+  echo "::set-output name=rc::$(echo $?)"
 }
 
 main
