@@ -60,8 +60,15 @@ function main {
   RC=$?
 
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
-  echo "::set-output name=stdout::\"$STDOUT\""
+
+  # Set output for GitHub Runner
   echo "::set-output name=rc::$RC"
+
+  STDOUT="${STDOUT//'%'/'%25'}"
+  STDOUT="${STDOUT//$'\n'/'%0A'}"
+  STDOUT="${STDOUT//$'\r'/'%0D'}"
+  
+  echo "::set-output name=stdout::$STDOUT"
 }
 
 main
