@@ -56,7 +56,7 @@ function main {
 
   aws --version
 
-  STDOUT=$(aws s3api $INPUT_COMMAND $INPUT_FLAGS)
+  STDOUT=$(aws s3api $INPUT_COMMAND $INPUT_FLAGS 2>&1)
   RC=$?
 
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
