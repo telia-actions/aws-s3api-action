@@ -60,7 +60,7 @@ function main {
   RC=$?
 
   echo aws s3api $INPUT_COMMAND $INPUT_FLAGS
-  echo "::set-output name=stdout::$STDOUT"
+  echo "::set-output name=stdout::\"$STDOUT\""
   echo "::set-output name=rc::$RC"
 }
 
